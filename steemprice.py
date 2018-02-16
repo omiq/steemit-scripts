@@ -62,8 +62,8 @@ def rewards(USERNAME):
     sbdbase = float(Amount(steem.steemd.get_feed_history()['current_median_history']['base']).amount)
 
     print("\n\nMARKET:")
-    print("\nSTEEMUSD:\t{}".format(get_steem_price()))
-    print("\nSBDUSD:\t{}".format(get_sbd_price()))
+    print("\nSTEEMUSD:\t{}".format(locale.currency(get_steem_price())))
+    print("\nSBDUSD:\t{}".format(locale.currency(get_sbd_price())))
 
     print("\n\nINTERNAL:")
     print("\n\nSTEEMUSD:\t{}".format( locale.currency(sbdbase) ) )
