@@ -53,7 +53,6 @@ def rewards(USERNAME):
 
     print("\n\nSTEEM POWER\t{:0.6f}".format( activeSP ))
 
-    #steem_balance = Amount(steem.get_account(USERNAME)["steem_balance"]).amount
     sbd_balance = Amount(acc["sbd_balance"]).amount
     lowest_ask = float(steem.get_ticker()["lowest_ask"])
     print("\n\nSBD BALANCE\t{:0.6f}".format( sbd_balance ))
