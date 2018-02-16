@@ -5,6 +5,7 @@ from steem.amount import Amount
 from steem.dex import Dex
 from steem.account import Account
 import locale
+import requests
 
 WHITEONBLUE = "\033[1;37;44m" 
 GREENONBLACK = "\033[0;32;40m" 
@@ -12,6 +13,24 @@ GREENONGREY = "\033[1;32;100m"
 
 # USD
 locale.setlocale( locale.LC_ALL, '' )
+
+
+def get_steem_price():
+
+    r = requests.get("https://api.coinmarketcap.com/v1/ticker/steem/?convert=USD")
+
+    result = r.json()
+
+    return result['price_usd']
+
+
+def get_sbd_price():
+    r = requests.get("https://api.coinmarketcap.com/v1/ticker/steem-dollar/?convert=USD")
+
+    result = r.json()
+
+    return result['price_usd']
+
 
 def rewards(USERNAME):
 
@@ -42,7 +61,11 @@ def rewards(USERNAME):
 
     sbdbase = float(Amount(steem.steemd.get_feed_history()['current_median_history']['base']).amount)
 
-    
+    print("\n\nMARKET:")
+    print("\nSTEEMUSD:\t{}".format(get_steem_price()))
+    print("\nSBDUSD:\t{}".format(get_sbd_price()))
+
+    print("\n\nINTERNAL:")
     print("\n\nSTEEMUSD:\t{}".format( locale.currency(sbdbase) ) )
     
     sbdusd = sbdbase / lowest_ask
