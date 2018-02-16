@@ -1,4 +1,5 @@
 import os
+import sys
 import json
 from steem import Steem
 from steem.amount import Amount
@@ -76,5 +77,5 @@ def rewards(USERNAME):
 
 if __name__ == '__main__':
     steem = Steem()
-    rewards("makerhacks")
+    rewards(sys.argv[1])
     
