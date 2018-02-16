@@ -41,7 +41,6 @@ def rewards(USERNAME):
     acc = steem.get_account(USERNAME)
     account = Account(USERNAME)
 
-    
     reward_SBD = acc["reward_sbd_balance"]
     reward_SP  = acc["reward_vesting_steem"]
     print("\n\nYour current rewards: {} and {} POWER".format(reward_SBD, reward_SP))
