@@ -1,3 +1,4 @@
+import os
 import re
 import tweepy
 from tweepy import OAuthHandler
@@ -14,10 +15,10 @@ class TwitterClient(object):
         Class constructor or initialization method.
         '''
         # keys and tokens from the Twitter Dev Console
-        consumer_key = 'XXXXXXXXXXXXXXXXXXXXXXXX'
-        consumer_secret = 'XXXXXXXXXXXXXXXXXXXXXXXXXXXX'
-        access_token = 'XXXXXXXXXXXXXXXXXXXXXXXXXXXX'
-        access_token_secret = 'XXXXXXXXXXXXXXXXXXXXXXXXX'
+        consumer_key = os.environ['TWITTER_KEY']
+        consumer_secret = os.environ['TWITTER_SECRET']
+        access_token = os.environ['TWITTER_TOKEN']
+        access_token_secret = os.environ['TWITTER_TOKEN_SECRET']
 
         # attempt authentication
         try:
@@ -93,7 +94,7 @@ def main():
     # creating object of TwitterClient Class
     api = TwitterClient()
     # calling function to get tweets
-    tweets = api.get_tweets(query=, count=200)
+    tweets = api.get_tweets(query='@studiopress', count=200)
 
     # picking positive tweets from tweets
     ptweets = [tweet for tweet in tweets if tweet['sentiment'] == 'positive']
@@ -104,8 +105,7 @@ def main():
     # percentage of negative tweets
     print("Negative tweets percentage: {} %".format(100 * len(ntweets) / len(tweets)))
     # percentage of neutral tweets
-    print("Neutral tweets percentage: {} % \
-        ".format(100 * len(tweets - ntweets - ptweets) / len(tweets)))
+    print("Neutral tweets percentage: {} %".format(100 * (len(tweets) - len(ntweets) - len(ptweets)) / len(tweets)))
 
     # printing first 5 positive tweets
     print("\n\nPositive tweets:")
